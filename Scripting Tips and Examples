@@ -1,0 +1,195 @@
+Created by: Josh Harvey
+Date: June 2016
+Updated: June 2017
+
+This is a document that will get updated and have new content added overtime.
+
+
+// Scripting Tips and Examples //
+Bash (Shell Script) and AppleScript Examples
+
+-- Bash (Shell Script) Section --
+
+#Packages
+- Expand a package
+pkgutil --expand /path/to/mystubbornpackage.pkg /path/to/expand/newname
+
+- Flatten a package 
+pkgutil --flatten /path/to/expand/newname /path/to/flattento.pkg
+
+- Install a package (NEEDS SUDO)
+sudo installer -pkg /path/of.pkg -target /
+
+#Add Certificates to Keychain (NEEDS SUDO)
+sudo security add-trusted-cert -d -r trustRoot -k /path/of/cert.cer
+
+#Pause
+/bin/sleep [number of seconds to wait]
+
+#Find Computer Name [ --get | --set ]
+scutil --get ComputerName [ LocalHostName | HostName ]
+
+#Output to text file with multiple lines (Make sure to use double quotes)
+echo “text
+goes
+here” >> /path/to.txt
+#”>>” causes the log to record on next line w/o overwrite | “>” overwrites the file each time)
+
+#Find version number of file from Info.plist
+cat /path/to/Info.plist | grep -A1 CFBundleShortVersionString | grep string | sed 's/<[^>]*>//g'
+
+#Filter Output Options
+grep "text here"
+awk {'print $1'} - $1 = first column, $2 = second column, etc..
+
+#Applescript In Shell Script (Mutliple Lines)
+/usr/bin/osascript <<'APPLESCRIPT'
+your applescript
+goes here
+APPLESCRIPT
+
+#List Applications in the parents directory only
+find /Applications -maxdepth '1' -iname '*.app'
+
+#Hides the file from Finder
+chflags hidden /file/goes/here
+
+#Unhides the file from Finder
+chflags nohidden /file/goes/here
+
+#Have alert box appear
+osascript -e 'tell app "System Events" to display dialog “put text here”’
+
+#function to get the current time in a Shell Script
+#Call function inside the script by using timestamp
+timestamp() {
+  date +"%T"
+}
+
+#Displays message with icon and one button
+osascript -e 'tell app "System Events" to display dialog "Please Install PGP Now" with icon caution buttons {"Ok"}'
+
+#Change Permissions on a Directory
+#Add Read/Write for all users:
+chmod ugo+rwx /Path/To/Directory
+#Remove Read/Write for all other users and give them Read only 
+chmod go-wx /Path/To/Directory
+
+#Clear History in Terminal
+history -c
+
+#Clear Entire History
+echo '' > ~/.bash_history
+
+#Compare Strings using if Statements 
+# == - matches
+# != - does not match
+if [[ $theVar1 == $theVar2 ]] #matches
+then
+	command goes here
+fi
+#### OR ####
+if [[ $theVar1 == $theVar2 ]] #matches
+then
+	command goes here
+elif
+	#Does NOT Match
+	if [[ $theVar1 != $theVar2 ]] 
+	then
+		command goes here
+	fi
+
+#Hide command output
+[command] &> /dev/null
+
+#Progress Spinner
+varGoesHere=`Command You Want To Pull Progress From`
+
+sp='/-\|'
+printf ' '
+for varGoesHere in $(seq 9); do
+  printf '\r%.1s' "$sp"
+  sp=${sp#?}${sp%???}
+  sleep 1
+done
+echo ''
+
+#Progress Bar
+processgoes.here & PID=$! 
+
+echo "Sample Test Here"
+printf "["
+while kill -0 $PID 2> /dev/null; do 
+    printf  "▓|▓|"
+    sleep 1
+done
+printf "] done!"
+
+#Yes/No Input from user
+echo "Would you like to restart the computer now?"
+echo "Press Y to restart now | Press N to restart later"
+select yn in "Y" "N"; do
+    case $yn in
+        y|Y ) echo $rebootNow; break;;
+        n|N ) exit;;
+    esac
+done
+
+#Function 
+testFunction() {
+	#commandsgo.here
+}
+
+[to call function in script just user the name of the function without ()]
+
+#Install Configuration Profiles
+[sudo] /usr/bin/profiles -i -F /Path/To/Profile.mobileconfig
+sudo - Installs profile as device profile instead of user
+-i - Installs profile as user profiles [unless ran under sudo]
+
+#Copy a file and show the ETA and Size of transfer
+rsync -ah --progress /Original/Path/To/File /Destination/Path/To/File
+
+
+##AppleScript Examples & Tips##
+
+#Set Variables 
+#Text
+	set variableName to “text”
+#Shell Script
+	set variableName to do shell script “/command/goes/here” [with administrator privileges]
+
+#If Statements
+
+
+#Display Dialog with Variables
+set theDialogText to "An error has occurred. Would you like to continue?"
+display dialog theDialogText buttons {"Don't Continue", "Continue"} default button "Continue" cancel button "Don't Continue"
+
+#Dialog with icons
+#Custom icons can be referenced but must be hard linked using ":"" not "/""
+tell app "System Events" display dialog "text here" [with title "Title Goes Here"] with icon caution [file "Path:To:File"] [buttons {"Button One", "Button Two"} default button "Button Two"]
+
+
+#Alert Dialog
+#Alert Display with Bold Title and Additional Text
+set theAlertText to "An error has occurred."
+set theAlertMessage to "The amount of available free space is dangerously low. Would you like to continue?"
+display alert theAlertText message theAlertMessage as critical buttons {"Don't Continue", "Continue"} default button "Continue" cancel button "Don't Continue"
+
+#Notification Messages
+display notification "Please Continue with Step 5 of the Cookbook" with title "ESE Deploy Prep" subtitle "Completed Successfully" sound name "Frog"
+
+#Variable to have user select file
+set theDocument to choose file with prompt "Please select a document to process:" 
+	#Define specific file type needed
+		[ of type {"extension"} ]
+	#Allow multiple files to be selected
+		[ with multiple selections allowed ]
+
+#Display Menu with Choices
+set theChoiceOptions to {"One", "Two", "Three"}
+set theBestOption to choose from list theChoiceOptions with prompt "Select your favorite number:" default items {"One"}
+theBestOption
+
+
