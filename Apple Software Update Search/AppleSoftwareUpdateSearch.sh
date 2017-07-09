@@ -80,9 +80,9 @@ if [[ -z "$getUpdates" ]];
 					#updateOS=`cat /tmp/SoftwareUpdates | sed 's/^[[:space:]]*//' | grep -e "macOS"`
 					doUpdate="`sudo softwareupdate --install "${update[3]}"`"
 					;;
-				3)
+				4)
 					#updateOS=`cat /tmp/SoftwareUpdates | sed 's/^[[:space:]]*//' | grep -e "macOS"`
-					doUpdate="`sudo softwareupdate --install "${update[3]}"`"
+					doUpdate="`sudo softwareupdate --install "${update[4]}"`"
 					;;
 				q)
 					echo "Exiting.."
