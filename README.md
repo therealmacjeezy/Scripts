@@ -1,14 +1,17 @@
 # Scripts
-A collection of personal scripts.
+A collection of scripts that I have written for both personal and professional use. These scripts will be a mixture of standalone
+scripts and Casper scripts (Policy Scripts & Extension Attributes). Each repository will have a readme that will list the files inside
+and a brief description of what the script does and any other important information about the script.
 
-More scripts will be added over the next few weeks and then any additonal scripts will be uploaded when created.
 
-Scripting Notes
-1. Scripting Tips and Examples
+- **Current Repository List**
+  1. Apple Software Update Search *[Standalone]*
+  2. Encrypt External Volume *[Casper Ready]*
+  3. Rename Startup Volume *[Casper Ready]*
 
-This is a live document that will be updated with additional information that will be helpful for remembering various commands. Contains Applescript and Shell Script Examples
+If you plan to use these scripts, I just ask that you credit my work and if possible, send me an email letting me know that you are using
+it and any feedback or issues you may have.
 
-SCRIPTS
-1. Encrypt External Volume
-
-This script will allow you to encrypt an external volume, change the passphrase for the volume (if you know the current one) and create a log of the passphrases that is encoded with base64 and can be uploaded to a JSS when using an Extension Attribute.
+**Contact Info**
+- josh[at]macjeezy.com
+- JAMFnation - therealmacjeezy
