@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ##########################################
-# Rename Startup Volume					 
+# Startup Volume Name					 
 # Extension Attribute	 				 
 # Josh Harvey | Jul 2017				 
 # josh[at]macjeezy.com 				 	 
