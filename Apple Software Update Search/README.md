@@ -1,5 +1,4 @@
 # Apple Software Update Search
-## Version 2 (Updated Feb 2018)
 
 This repo contains a script *[AppleSoftwareUpdateSearch.sh]* that can be used to install Apple Software Updates on computers that are enrolled in your Jamf Pro Server.
 
