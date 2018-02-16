@@ -5,10 +5,10 @@ and a brief description of what the script does and any other important informat
 
 
 - **Current Repository List**
-  1. Apple Software Update Search *[Standalone]*
-  2. Disable Smart Card Pairing *[Casper Ready]*
-  3. Encrypt External Volume *[Casper Ready]*
-  4. Rename Startup Volume *[Casper Ready]*
+  1. Apple Software Update Search (Version 2) *[Jamf Pro Ready]*
+  2. Disable Smart Card Pairing *[Jamf Pro Ready]*
+  3. Encrypt External Volume *[Jamf Pro Ready]*
+  4. Rename Startup Volume *[Jamf Pro Ready]*
 
 If you plan to use these scripts, I just ask that you credit my work and if possible, send me an email letting me know that you are using
 it and any feedback or issues you may have.
