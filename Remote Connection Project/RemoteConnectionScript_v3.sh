@@ -23,7 +23,7 @@ cat <<'EOF'
     > Created By: Josh Harvey | March 2018
 								
     > JamfNation: therealmacjeezy
-    > Github: github.com/therealmacjeezy
+    > Github: github.com/therealmacjeezy 
     *************************************************************************
 
 EOF
