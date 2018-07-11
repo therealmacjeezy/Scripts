@@ -9,6 +9,7 @@ and a brief description of what the script does and any other important informat
   2. Disable Smart Card Pairing *[Jamf Pro Ready]*
   3. Encrypt External Volume *[Jamf Pro Ready]*
   4. Rename Startup Volume *[Jamf Pro Ready]*
+  5. Remote Connection Project *[Standalone]*
 
 If you plan to use these scripts, I just ask that you credit my work and if possible, send me an email letting me know that you are using
 it and any feedback or issues you may have.
