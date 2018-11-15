@@ -1,0 +1,1 @@
+This script calls various policies via custom triggers in Jamf Pro. Please make sure you have modified/created each of the triggers that are being used. Each trigger should be explained in the script notes.
