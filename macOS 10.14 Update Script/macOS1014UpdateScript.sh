@@ -3,7 +3,7 @@
 #################################################
 # macOS 10.14 Update Script
 # Joshua Harvey | August 2018
-# joshua.harvey[at]nasa.gov
+# josh[at]macjeezy.com
 #################################################
 
 ####### Supported macOS Versions ##########################################################
