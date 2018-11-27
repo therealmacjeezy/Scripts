@@ -61,15 +61,7 @@ APPLESCRIPT
 </plist>
 EOF
 
-# Check for Fusion Drive
-fusionCheck=$(/usr/sbin/diskutil info | grep "Fusion Drive")
-
-# Runs the startosinstall binary based off the disk type pulled above
-if [[ -z "$fusionCheck" ]]; then
-	"/Applications/Install macOS Mojave.app/Contents/Resources/startosinstall" --applicationpath "/Applications/Install macOS Mojave.app" --rebootdelay 0 --nointeraction --agreetolicense
-else
-	"/Applications/Install macOS Mojave.app/Contents/Resources/startosinstall" --applicationpath "/Applications/Install macOS Mojave.app" --rebootdelay 0 --nointeraction --agreetolicense --converttoapfs NO
-fi
+"/Applications/Install macOS Mojave.app/Contents/Resources/startosinstall" --nointeraction --agreetolicense
 
 # Pulls the current user
 currUser=$(ls -l /dev/console | awk '{print $3}')
