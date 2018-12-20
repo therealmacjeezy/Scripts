@@ -4,7 +4,10 @@
 # Microsoft AutoUpdate Script
 # Office 2016
 # Joshua Harvey | November 2018
-# joshua.harvey[at]nasa.gov
+# Updated: December 2018
+# josh[at]macjeezy.com
+# GitHub - github.com/therealmacjeezy    
+# JAMFnation - therealmacjeezy
 #################################################
 
 ############ Script Parameters Info #############
@@ -21,6 +24,33 @@
 ## updates for Skype for Business, MAU and Remote
 ## Desktop since they are the same for both versions.
 #################################################
+
+## 12-20-18 - Resolved Issues
+# Added a version check for msupdate at the beginning of the script. This resolves the issue where the script was throwing an error and exiting prior to updating the apps. The cause of the issue was msupdate not being on the latest version. msupdate updates override any updates that are avaiable for the other applications. 
+
+# Function that gets called to look for any updates that are avaiable for the Microsoft Office applications
+updateCheck() {
+	versionCheck=$(/Library/Application\ Support/Microsoft/MAU2.0/Microsoft\ AutoUpdate.app/Contents/MacOS/msupdate -l | grep "No updates available")
+	
+	# Uses the above variable that checks for any avaiable updates and exits the script if no updates are found
+	if [[ "$versionCheck" == "No updates available" ]]; then
+			echo "All Microsoft Office applications are up to date. Exiting"
+			exit 0
+	else
+			echo "Microsoft Office updates found.. starting updates.."
+	fi
+}
+
+# Checks to see if Microsoft AutoUpdate is on the latest version and updates it if not, if already on the latest version it will continue on and use the above function to look for additonal updates. 
+if [[ ! -z `/Library/Application\ Support/Microsoft/MAU2.0/Microsoft\ AutoUpdate.app/Contents/MacOS/msupdate -l | grep "MSau03"` ]]; then
+	echo "Microsoft AutoUpdate requires an update before continuing. Starting Update."
+	/Library/Application\ Support/Microsoft/MAU2.0/Microsoft\ AutoUpdate.app/Contents/MacOS/msupdate -i -a msau03
+	echo "Microsoft AutoUpdate has been updated. Looking for additional updates.."
+	updateCheck
+else
+	echo "Microsoft AutoUpdate is up to date. Checking for any additional available application updates.."
+	updateCheck
+fi
 
 # Script Parameters to apply version control with updates
 # Word
@@ -58,8 +88,8 @@ else
     echo "Missing OneNote Version"
 fi
 
-# Skype for Business, MAU and Remote Desktop
+# Skype for Business and Remote Desktop
 # Uses the same version for both 2019 and 2016 so adding them to the update each time
-/Library/Application\ Support/Microsoft/MAU2.0/Microsoft\ AutoUpdate.app/Contents/MacOS/msupdate -i -a msfb16 msau03 msrd10
+/Library/Application\ Support/Microsoft/MAU2.0/Microsoft\ AutoUpdate.app/Contents/MacOS/msupdate -i -a msfb16 msrd10
 
 exit 0
