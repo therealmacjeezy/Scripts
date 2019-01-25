@@ -1,4 +1,4 @@
-## LAPS for Mac
+## LAPS for macOS
 
 #### This script will randomize the Local Administrator account password. It uses an Extension Attribute to store the randomized password and script parameters to store the following items:
   - API Username
