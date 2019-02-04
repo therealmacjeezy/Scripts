@@ -8,15 +8,16 @@
 # JAMFnation - therealmacjeezy
 #################################################
 
+# Database Name
+dbHost='<database_location>'
 # Database Password
 dbPass='<database_password>'
-# This array stores the names of your MySQL databases, if you only have one database for your setup, comment out the array on line 15 and uncomment the array on line 18
+# This array stores the names of your MySQL databases, if you only have one database for your setup, comment out the array on line 17 and uncomment the array on line 20
     # Array for Multiple Databases
     dbNames=( "<db1>" "<db2>" "<db3>" )
 
     # Array for a Single Database
     #dbNames=( "<db1>" )
-# Path for the script log
 # Path for the script log
 logPath="/path/to/mdmcleanup.log"
 
