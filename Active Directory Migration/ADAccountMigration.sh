@@ -2,9 +2,11 @@
 
 #################################################
 # AD Account Migration Script
-# Joshua Harvey | October 2018
-# joshua.harvey[at]nasa.gov
-# NASA Goddard Space Flight Center
+# Joshua Harvey | November 2018
+# Updated: December 2018
+# josh[at]macjeezy.com
+# GitHub - github.com/therealmacjeezy    
+# JAMFnation - therealmacjeezy
 #################################################
 
 # Variables for use later in the script
