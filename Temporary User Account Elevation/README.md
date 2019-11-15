@@ -19,3 +19,6 @@ If the **Remove Privileges** option is selected, the script will perform the fol
 2. If present in those groups, it will remove the user from them and revert them back to a standard user
 
 If the **Cancel** option is selected, the script will exit
+
+**Note:** 
+> This script pulls information from a smartcard, to use this script without a smartcard, you will need to comment out the **Prompt_For_Smartcard** and **getUPN** functions (Lines 137-158) and remove the *$UPN* variable that is used when creating the log (Line 189, in the if statement at the end of the script)
