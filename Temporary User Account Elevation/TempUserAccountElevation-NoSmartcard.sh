@@ -134,6 +134,8 @@ REMOVE_ACCOUNT_ELEVATION() {
 currUser=$(scutil <<< "show State:/Users/ConsoleUser" | awk -F': ' '/[[:space:]]+Name[[:space:]]:/ { if ( $2 != "loginwindow" ) { print $2 }}  ')
 currUserUID=$(id -u "$currUser")
 
+echo $currUser > /tmp/user_receipt
+
 # Ask user what they want to do (add / remove)
 # Applescript prompt
 SCRIPT_OPTIONS=$(
@@ -163,7 +165,7 @@ APPLESCRIPT
 
 if [[ "$SCRIPT_OPTIONS" == "elevate" ]]; then
 	echo "Starting account elevation"
-	echo "$UPN - Elevation Requested for $currUser - `date`" >> /Users/Shared/ElevationRequests.log
+	echo "$currUser - Elevation Requested for $currUser - `date`" >> /Users/Shared/ElevationRequests.log
 	chflags hidden "/Users/Shared/ElevationRequests.log"
 	START_ACCOUNT_ELEVATION
 elif [[ "$SCRIPT_OPTIONS" == "remove" ]]; then
