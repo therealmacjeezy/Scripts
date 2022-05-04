@@ -1,5 +1,7 @@
 ## Temporary User Account Elevation
 
+**Note:** This script requires the user to have a smartcard inserted in the system. If you are looking for the **non-smartcard** version, use `TempUserAccountElevation-NoSmartcard.sh`
+
 This script will temporarily elevate a user's account. The user's account can either be set in a script parameter (#4) or pull the user account of the user that runs the policy via Self Service.
 
 When the script runs, the user will be prompted to insert their smartcard into their card reader and then prompted to select one of the following options:
