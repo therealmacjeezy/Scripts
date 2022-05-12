@@ -164,7 +164,7 @@ def start_profile_check(apiToken, jamfURL):
                     computerGroupsScope = "N/A"
             else:
                 theScope = "All Computers"
-            profileData = [profileName, profileID, theScope, computersScope, computerGroupsScope]
+            profileData = [f'=HYPERLINK(\"https://{jamfURL}/OSXConfigurationProfiles.html?id={profileID}&o=r", \"{profileName}\")', profileID, theScope, computersScope, computerGroupsScope]
             data.append(profileData)
         except Exception as errorMessage:
             print(f"oops..\n{errorMessage}")

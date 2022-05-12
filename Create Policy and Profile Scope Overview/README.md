@@ -13,6 +13,10 @@ This script gets the list of all of Policies and Configuration Profiles used in 
    - Policy Scope: Computers
    - Policy Scope: Smart Groups
 
+### To-Do
+ [ ] - Add Exclusions to the Policy section
+ [ ] - Add Policy Status (enabled/disabled) 
+
 ----
 ## Requirements
 
@@ -92,3 +96,18 @@ The Profile Scope Overview has been saved at:
 The Configuration Profile Scope Overview has been saved at:
 	=> /Users/josh.harvey/Desktop/Jamf Pro Configuration Profile Scope Overview.csv
 ```
+
+**Example JamfProConfigurationProfileScopeOverview.csv**
+| Configuration Profile Name                | Configuration Profile ID | Configuration Profile Scope | Scope: Computers | Scope: Computer Groups                  |
+|-------------------------------------------|--------------------------|-----------------------------|------------------|-----------------------------------------|
+| Default Plan - Jamf Protect Configuration | 1                        | All Computers               | N/A              | N/A                                     |
+| Jamf Connect - Login                      | 3                        | All Computers               | N/A              | N/A                                     |
+| Jamf Connect - Menu                       | 4                        | All Computers               | N/A              | N/A                                     |
+| Jamf Connect License                      | 5                        | All Computers               | N/A              | N/A                                     |
+| Loading... Network Profile                | 8                        | All Computers               | N/A              | N/A                                     |
+| Jamf Connect Login Window (Self Service)  | 10                       | Custom                      | N/A              | Remove Jamf Connect                     |
+| Jamf Connect Menu (Self Service)          | 11                       | Custom                      | N/A              | macOS Update Ready, Remove Jamf Connect |
+| Jamf Connect License (Self Service)       | 12                       | Custom                      | N/A              | Remove Jamf Connect                     |
+| Disable Displays Prefrence Pane           | 13                       | All Computers               | N/A              | N/A                                     |
+| Jamf Connect - Menu Keychain Test         | 14                       | All Computers               | N/A              | N/A                                     |
+| Keychain Test                             | 15                       | All Computers               | N/A              | N/A                                     |
