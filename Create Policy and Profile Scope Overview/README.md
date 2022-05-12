@@ -2,6 +2,8 @@
 
 > This script uses [jamfAuth](https://github.com/therealmacjeezy/JamfAuth) to perform the API authentication. Looking to setup **jamfAuth**? [Click here..](https://github.com/therealmacjeezy/JamfAuth#installation)
 
+Looking for an easy way to get the scopes for all of your Policies and Configuration Profiles? Look no further.. The `getScopes.py` does just that. 
+
 This script gets the list of all of Policies and Configuration Profiles used in your Jamf Pro server and creates two .csv files (`Jamf Pro Policy Scope Overview.csv` and `Jamf Pro Configuration Profile Scope Overview.csv`) that contain the following:
 
  - Policy / Configuration Profile Name
