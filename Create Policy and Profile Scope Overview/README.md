@@ -14,8 +14,8 @@ This script gets the list of all of Policies and Configuration Profiles used in 
    - Policy Scope: Smart Groups
 
 ### To-Do
- [ ] - Add Exclusions to the Policy section
- [ ] - Add Policy Status (enabled/disabled) 
+- [ ] Add Exclusions to the Policy section
+- [ ] Add Policy Status (enabled/disabled) 
 
 ----
 ## Requirements
