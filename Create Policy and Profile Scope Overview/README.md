@@ -8,8 +8,8 @@ This script gets the list of all of Policies and Configuration Profiles used in 
     - Hyperlinked to the Policy / Configuration Profile in Jamf Pro
  - Policy / Configuration Profile ID
  - Policy Scope
- - Policy Scope: Computers
- - Policy Scope: Smart Groups
+   - Policy Scope: Computers
+   - Policy Scope: Smart Groups
 
 ----
 ## Requirements
@@ -19,13 +19,13 @@ This script gets the list of all of Policies and Configuration Profiles used in 
 
 #### Python Packages
  - requests
-  - `pip3 install requests`
+   - `pip3 install requests`
  - pandas
-  - `pip3 install pandas`
+   - `pip3 install pandas`
  - jamfAuth
-  - `pip3 install jamfAuth`
+   - `pip3 install jamfAuth`
  - json
-  - `pip3 install json`
+   - `pip3 install json`
 
 ----
 ## Usage
