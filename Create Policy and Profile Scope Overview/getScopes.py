@@ -88,8 +88,8 @@ def start_policy_check(apiToken, jamfURL):
         df = pd.DataFrame(data)
         try:
             pwd = os.getcwd()
-            df.to_csv('Jamf Pro Policy Scope Overview.csv', index=False, header=policyCSVHeaders, encoding='utf-8')
-            print(f"\nThe Profile Scope Overview has been saved at:\n\t=> {pwd}/Jamf Pro Policy Scope Overview.csv")
+            df.to_csv('JamfPro_PolicyScope_Overview.csv', index=False, header=policyCSVHeaders, encoding='utf-8')
+            print(f"\nThe Profile Scope Overview has been saved at:\n\t=> {pwd}/JamfPro_PolicyScope_Overview.csv")
         except Exception as errorMessage:
             print(f"policy error: {errorMessage}")
 
@@ -173,8 +173,8 @@ def start_profile_check(apiToken, jamfURL):
         df = pd.DataFrame(data)
         try:
             pwd = os.getcwd()   
-            df.to_csv('Jamf Pro Configuration Profile Scope Overview.csv', index=False, header=profileCSVHeaders, encoding='utf-8')
-            print(f"\nThe Configuration Profile Scope Overview has been saved at:\n\t=> {pwd}/Jamf Pro Configuration Profile Scope Overview.csv")
+            df.to_csv('JamfPro_ConfigurationProfile_ScopeOverview.csv', index=False, header=profileCSVHeaders, encoding='utf-8')
+            print(f"\nThe Configuration Profile Scope Overview has been saved at:\n\t=> {pwd}/JamfPro_ConfigurationProfile_ScopeOverview.csv")
         except Exception as errorMessage:
             print(f"policy error: {errorMessage}")
 
