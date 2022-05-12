@@ -2,27 +2,39 @@
 
 > This script uses [jamfAuth](https://github.com/therealmacjeezy/JamfAuth) to perform the API authentication. Looking to setup **jamfAuth**? [Click here..](https://github.com/therealmacjeezy/JamfAuth#installation)
 
-Looking for an easy way to get the scopes for all of your Policies and Configuration Profiles? Look no further.. The `getScopes.py` does just that. 
+Looking for an easy way to get the scopes for all of your Policies and Configuration Profiles? Look no further.. The `CreateScopeSummary.py` does just that. 
 
-This script gets the list of all of Policies and Configuration Profiles used in your Jamf Pro server and creates two **.csv** files (`JamfPro_ProfileScope_Overview.csv` and `JamfPro_ConfigurationProfileScope_Overview.csv`) that contain the following:
+This script reaches out to your Jamf Pro Server and gets a list of the Policies and Configuration Profiles you are using within your Jamf Pro Server. It then loops through each of the Policies and Configuration Profiles to get the following information:
 
-  - Policy / Configuration Profile Name
-     - Hyperlinked to the Policy / Configuration Profile in Jamf Pro
-  - Policy / Configuration Profile ID
-  - Policy Scope
-    - Policy Scope: Computers
-    - Policy Scope: Smart Groups
+ - Policy / Configuration Profile Name
+    - When this gets saved to the `.csv`, a hyperlink gets created to take you to that policy within Jamf Pro when clicked on.
+ - Policy / Configuration Profile ID
+ - Policy Status *(Is it enabled?)*
+ - Policy / Configuration Profile Scope
+ - Policy / Configuration Profile Exclusions
+
+Once it's done, it will then create two `.csv` files containing the above information and display the path to each file inside the Terminal window. There are two sample `.csv` files in this repository to give you an example of what you should expect these files to contain. I've also included markdown table versions of both files in the **Examples** section *(#2 and #3)*.
+
+
+Below are the categories the script **currently checks for** within `scope` and `exclusions`:
+ - Computers
+ - Computer Groups
+
 
 ----
 ### To-Do
-- [ ] Add Exclusions to the Policy section
-- [ ] Add Policy Status (enabled/disabled) 
+- [x] Add Exclusions to the Policy section
+- [x] Add Policy Status (enabled/disabled)
+- [ ] Add the following categories to the scoped targets and exclusions search:
+  - [ ] Users
+  - [ ] LDAP User Groups 
 
 ----
 ## Requirements
 
 #### Python Version
-3.8.13+
+ - 3.8.x 
+    - Tested with 3.8.13
 
 #### Python Packages
  - requests
@@ -37,13 +49,13 @@ This script gets the list of all of Policies and Configuration Profiles used in 
 ----
 ## Usage
 ```shell
-python3 /path/to/getScopes.py
+python3 /path/to/CreateScopeSummary.py
 ```
 ----
-## Example
-
+## Examples
+#### Example 1: CreateScopeSummary.py Output
 ```shell
-22:26:15 [took 3s] ➜ desktop python:(3.8.13) python3 getScopes.py
+09:43:12 [took 4s] ➜ python:(3.8.13) python3 CreateScopeSummary.py
    _                  __   _         _   _
   (_) __ _ _ __ ___  / _| /_\  _   _| |_| |__
   | |/ _` | '_ ` _ \| |_ //_\\| | | | __| '_ \
@@ -55,9 +67,9 @@ python3 /path/to/getScopes.py
 ----------- Modified: 04/28/22
 
 > jamfAuth Config Path: /Users/josh.harvey/Library/Python/3.8/lib/python/site-packages/jamfAuth/support/.jamfauth.json
-[Jamf Pro Host Name]: planetexpress.jamfcloud.com
-[Jamf Pro API URL]: https://planetexpress.jamfcloud.com/api/v1/
-[Jamf Pro API Username]: bender42
+[Jamf Pro Host Name]: mooncheese.jamfcloud.com
+[Jamf Pro API URL]: https://mooncheese.jamfcloud.com/api/v1/
+[Jamf Pro API Username]: mcapi
 [>jamfAuth] Loaded API Token
 [Jamf Pro API Token Status]: Valid
 [>jamfAuth] Loaded API Token
@@ -66,49 +78,63 @@ python3 /path/to/getScopes.py
 
 >> Total Policies: 8
 ----------------------------
-- Policy Name: Elevate Account (ID: 8)
-- Policy Name: Install Jamf Connect (ID: 6)
-- Policy Name: Install jamfAuth (ID: 4)
-- Policy Name: Install Mooncheese Resources (ID: 5)
-- Policy Name: Setup Jamf Connect (ID: 2)
-- Policy Name: Submit Computer Inventory (ID: 7)
-- Policy Name: Test Sound (ID: 3)
-- Policy Name: Update Inventory (ID: 1)
+Elevate Account (ID: 8)
+Install Jamf Connect (ID: 6)
+Install jamfAuth (ID: 4)
+Install Mooncheese Resources (ID: 5)
+Setup Jamf Connect (ID: 2)
+Submit Computer Inventory (ID: 7)
+Test Sound (ID: 3)
+Update Inventory (ID: 1)
 
 The Profile Scope Overview has been saved at:
-	=> /Users/josh.harvey/Desktop/JamfPro_PolicyScope_Overview.csv
+	=> /Users/josh.harvey/Github/Scripts/Create Policy and Profile Scope Overview/JamfPro_PolicyScope_Overview-05122022.csv
 
 ==== Jamf Pro Configuration Profiles ====
 
 >> Total Configuration Profiles: 11
 ----------------------------
-- Configuration Profile Name: Default Plan - Jamf Protect Configuration (ID: 1)
-- Configuration Profile Name: Jamf Connect - Login (ID: 3)
-- Configuration Profile Name: Jamf Connect - Menu (ID: 4)
-- Configuration Profile Name: Jamf Connect License (ID: 5)
-- Configuration Profile Name: Loading... Network Profile (ID: 8)
-- Configuration Profile Name: Jamf Connect Login Window (Self Service) (ID: 10)
-- Configuration Profile Name: Jamf Connect Menu (Self Service) (ID: 11)
-- Configuration Profile Name: Jamf Connect License (Self Service) (ID: 12)
-- Configuration Profile Name: Disable Displays Prefrence Pane (ID: 13)
-- Configuration Profile Name: Jamf Connect - Menu Keychain Test (ID: 14)
-- Configuration Profile Name: Keychain Test (ID: 15)
+Default Plan - Jamf Protect Configuration (ID: 1)
+Jamf Connect - Login (ID: 3)
+Jamf Connect - Menu (ID: 4)
+Jamf Connect License (ID: 5)
+Loading... Network Profile (ID: 8)
+Jamf Connect Login Window (Self Service) (ID: 10)
+Jamf Connect Menu (Self Service) (ID: 11)
+Jamf Connect License (Self Service) (ID: 12)
+Disable Displays Prefrence Pane (ID: 13)
+Jamf Connect - Menu Keychain Test (ID: 14)
+Keychain Test (ID: 15)
 
 The Configuration Profile Scope Overview has been saved at:
-	=> /Users/josh.harvey/Desktop/JamfPro_ConfigurationProfileScope_Overview.csv
+	=> /Users/josh.harvey/Github/Scripts/Create Policy and Profile Scope Overview/JamfPro_ConfigurationProfile_ScopeOverview-05122022.csv
 ```
 
-**Example JamfPro_ConfigurationProfileScope_Overview.csv**
-| Configuration Profile Name                | Configuration Profile ID | Configuration Profile Scope | Scope: Computers | Scope: Computer Groups                  |
-|-------------------------------------------|--------------------------|-----------------------------|------------------|-----------------------------------------|
-| Default Plan - Jamf Protect Configuration | 1                        | All Computers               | N/A              | N/A                                     |
-| Jamf Connect - Login                      | 3                        | All Computers               | N/A              | N/A                                     |
-| Jamf Connect - Menu                       | 4                        | All Computers               | N/A              | N/A                                     |
-| Jamf Connect License                      | 5                        | All Computers               | N/A              | N/A                                     |
-| Loading... Network Profile                | 8                        | All Computers               | N/A              | N/A                                     |
-| Jamf Connect Login Window (Self Service)  | 10                       | Custom                      | N/A              | Remove Jamf Connect                     |
-| Jamf Connect Menu (Self Service)          | 11                       | Custom                      | N/A              | macOS Update Ready, Remove Jamf Connect |
-| Jamf Connect License (Self Service)       | 12                       | Custom                      | N/A              | Remove Jamf Connect                     |
-| Disable Displays Prefrence Pane           | 13                       | All Computers               | N/A              | N/A                                     |
-| Jamf Connect - Menu Keychain Test         | 14                       | All Computers               | N/A              | N/A                                     |
-| Keychain Test                             | 15                       | All Computers               | N/A              | N/A                                     |
+
+#### Example 2: `JamfPro_ConfigurationProfile_ScopeOverview-05122022.csv`
+| **Configuration Profile Name**            | **Configuration Profile ID** | **Configuration Profile Scope** | **Scope: Computers** | **Scope: Computer Groups**                              | **Scope: Excluded Computers**  | **Scope: Excluded Computer Groups** |
+|-------------------------------------------|------------------------------|---------------------------------|----------------------|---------------------------------------------------------|--------------------------------|-------------------------------------|
+| Default Plan - Jamf Protect Configuration | 1                            | All Computers                   | N/A                  | N/A                                                     | N/A                            | N/A                                 |
+| Jamf Connect - Login                      | 3                            | All Computers                   | N/A                  | N/A                                                     | N/A                            | Remove Jamf Connect (ID: 3)         |
+| Jamf Connect - Menu                       | 4                            | All Computers                   | N/A                  | N/A                                                     | N/A                            | Remove Jamf Connect (ID: 3)         |
+| Jamf Connect License                      | 5                            | All Computers                   | N/A                  | N/A                                                     | N/A                            | Remove Jamf Connect (ID: 3)         |
+| Loading... Network Profile                | 8                            | All Computers                   | N/A                  | N/A                                                     | N/A                            | N/A                                 |
+| Jamf Connect Login Window (Self Service)  | 10                           | Custom                          | N/A                  | Remove Jamf Connect (ID: 3)                             | N/A                            | N/A                                 |
+| Jamf Connect Menu (Self Service)          | 11                           | Custom                          | N/A                  | macOS Update Ready (ID: 4), Remove Jamf Connect (ID: 3) | N/A                            | N/A                                 |
+| Jamf Connect License (Self Service)       | 12                           | Custom                          | N/A                  | Remove Jamf Connect (ID: 3)                             | N/A                            | N/A                                 |
+| Disable Displays Prefrence Pane           | 13                           | All Computers                   | N/A                  | N/A                                                     | N/A                            | N/A                                 |
+| Jamf Connect - Menu Keychain Test         | 14                           | All Computers                   | N/A                  | N/A                                                     | N/A                            | N/A                                 |
+| Keychain Test                             | 15                           | All Computers                   | N/A                  | N/A                                                     | ladmin‚Äôs MacBook Pro (ID: 1) | Bound Systems (ID: 5)               |
+
+
+#### Example 3: `JamfPro_PolicyScope_Overview-05122022.csv`
+| **Policy Name**              | **Policy ID** | **Policy Enabled?** | **Policy Scope** | **Scope: Computers**           | **Scope: Computer Groups** | **Scope: Excluded Computers** | **Scope: Excluded Computer Groups**                       |
+|------------------------------|---------------|---------------------|------------------|--------------------------------|----------------------------|-------------------------------|-----------------------------------------------------------|
+| Elevate Account              | 8             | TRUE                | All Computers    | N/A                            | N/A                        | N/A                           | Bound Systems (ID: 5), Software Updates Available (ID: 7) |
+| Install Jamf Connect         | 6             | TRUE                | All Computers    | N/A                            | N/A                        | N/A                           | N/A                                                       |
+| Install jamfAuth             | 4             | TRUE                | All Computers    | N/A                            | N/A                        | N/A                           | N/A                                                       |
+| Install Mooncheese Resources | 5             | TRUE                | All Computers    | N/A                            | N/A                        | N/A                           | N/A                                                       |
+| Setup Jamf Connect           | 2             | FALSE               | All Computers    | N/A                            | N/A                        | N/A                           | N/A                                                       |
+| Submit Computer Inventory    | 7             | TRUE                | All Computers    | N/A                            | N/A                        | N/A                           | N/A                                                       |
+| Test Sound                   | 3             | TRUE                | Custom           | ladmin‚Äôs MacBook Pro (ID: 1) | N/A                        | N/A                           | N/A                                                       |
+| Update Inventory             | 1             | TRUE                | All Computers    | N/A                            | N/A                        | N/A                           | N/A                                                       |

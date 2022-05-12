@@ -1,9 +1,0 @@
-Policy Name,Policy ID,Policy Scope,Scope: Computers,Scope: Computer Groups
-"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=8&o=r"", ""Elevate Account"")",8,All Computers,N/A,N/A
-"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=6&o=r"", ""Install Jamf Connect"")",6,All Computers,N/A,N/A
-"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=4&o=r"", ""Install jamfAuth"")",4,All Computers,N/A,N/A
-"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=5&o=r"", ""Install Mooncheese Resources"")",5,All Computers,N/A,N/A
-"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=2&o=r"", ""Setup Jamf Connect"")",2,All Computers,N/A,N/A
-"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=7&o=r"", ""Submit Computer Inventory"")",7,All Computers,N/A,N/A
-"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=3&o=r"", ""Test Sound"")",3,Custom,ladmin’s MacBook Pro,N/A
-"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=1&o=r"", ""Update Inventory"")",1,All Computers,N/A,N/A
