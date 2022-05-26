@@ -45,6 +45,7 @@ There are four options built into `BulkLostMode-v2.py`:
 ----
 ## Examples
 **BulkLostMode-v2.py**
+
 This command will enable Lost Mode on the serial numbers entered in the csv.
 ```shell
 12:11:29 ➜ Scripts/BulkLostMode-v2 git:(master?) python:(3.8.13) python3 bulkLostMode-v2.py
@@ -73,6 +74,7 @@ Lost Mode Command Successfully Sent to iPad.
 ```
 
 **BulkLostMode-v2.py config**
+
 This example shows the `config` option being used to display the current settings being used.
 
 ```shell
@@ -106,6 +108,7 @@ config
 ```
 
 **BulkLostMode-v2.py disable**
+
 This example shows the `disable` option being used.
 ```shell
 12:14:10 ➜ Scripts/BulkLostMode-v2 git:(master?) python:(3.8.13) python3 bulkLostMode-v2.py disable
