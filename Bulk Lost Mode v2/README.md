@@ -16,10 +16,14 @@ Once you have saved the list of Serial Numbers, you can use the following comman
 
 ### Options
 There are four options built into `BulkLostMode-v2.py`:
- - enable: This will enable Lost Mode on the devices **(Default Action)**
- - disable: This will **disable** Lost Mode on the devices
- - config: This will display the current authentication and BulkLostMode-v2 variables
- - help: This will display how to use this script and the available options
+ - `enable`: This will enable Lost Mode on the devices **(Default Action)**
+   - **Usage:** `python3 BulkLostMode-v2.py enable`
+ - `disable`: This will **disable** Lost Mode on the devices
+   - **Usage:** `python3 BulkLostMode-v2.py disable`
+ - `config`: This will display the current authentication and BulkLostMode-v2 variables
+   - **Usage:** `python3 BulkLostMode-v2.py config`
+ - `help`: This will display how to use this script and the available options
+   - **Usage:** `python3 BulkLostMode-v2.py help`
 
 ----
 ## Requirements
@@ -62,6 +66,10 @@ This command will enable Lost Mode on the serial numbers entered in the csv.
 [Jamf Pro API Token Status]: Valid
 [>jamfAuth] Loaded API Token
 Lost Mode Command Successfully Sent to Bender-DNQXDS5ZWD5W
+Lost Mode Command Successfully Sent to TEST-DMPDDWD9Q1GC.
+Lost Mode Command Successfully Sent to TEST-DLXSDW8YGHKF.
+Lost Mode Command Successfully Sent to TEST-DLXQN7YDFK9.
+Lost Mode Command Successfully Sent to iPad.
 ```
 
 **BulkLostMode-v2.py config**

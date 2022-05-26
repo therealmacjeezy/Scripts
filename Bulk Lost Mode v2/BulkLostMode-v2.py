@@ -61,7 +61,7 @@ lostModeDisable = ''
 ## lostModeFootnote: Do you want a footnote message to be displayed? **Optional**
 lostModeFootnote = 'Thank you!'
 ## deviceList: CSV file containing all of the serial numbers to activate lost mode on. **REQUIRED**
-deviceList = '/Users/josh.harvey/Github/Scripts/BulkLostMode-v2/DeviceList.csv'
+deviceList = 'DeviceList.csv'
 ###################################################
 
 def read_device_list(deviceList):
