@@ -21,6 +21,7 @@ and a brief description of what the script does and any other important informat
     14. APNS Command Check *[Standalone]*
     15. Temporary User Account Elevation *[Jamf Pro Ready]*
     16. Create Policy and Profile Scope Overview *[Requires [jamfAuth](https://github.com/therealmacjeezy/JamfAuth)]*
+    16. Bulk Lost Mode v2 *[Requires [jamfAuth](https://github.com/therealmacjeezy/JamfAuth)]*
 
 If you plan to use these scripts, I just ask that you credit my work and if possible, send me an email letting me know that you are using
 it and any feedback or issues you may have.
