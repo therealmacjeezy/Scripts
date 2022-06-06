@@ -24,3 +24,11 @@ This script will create the following log files:
  - Jamf Pro
  - A policy to install Xcode Command Line tools with a custom trigger
 
+----
+## `InstallHomebrewPackages.sh`
+> documentation coming soon
+
+----
+## `InstallRubyGems.sh`
+> documentation coming soon
+
