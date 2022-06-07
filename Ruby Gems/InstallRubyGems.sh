@@ -27,23 +27,20 @@
 #       SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 #   Author: Josh Harvey
-#   Last Modified: 06/06/2022
-#   Version: 0.1
+#   Last Modified: 06/07/2022
+#   Version: 0.2
 #
-#   Description: This script will verify that Homebrew is installed and then installs any Homebrew 
-#   Packages that you need for your environment.
+#   Description: This script will install Ruby Gems on macOS systems via Jamf Pro
 #
 ####################################################################################################
 
 ################# VARIABLES ######################
-## homebrewPackages: The list of packages you want to install via Homebrew, seperated by commas **REQUIRED**
+## rubyGems: The list of packages you want to install via Ruby, seperated by commas **REQUIRED**
 rubyGems="$4"
 ## currentUser: Grabs the username of the current logged in user **DO NOT CHANGE**
 currentUser=$(echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ && ! /loginwindow/ { print $3 }')
-## installHomebrewLog: Location of the installHomebrew script log **DO NOT CHANGE**
-InstallRubyGems="/private/var/log/InstallRubyGems.log"
-## homebrewLog: Location of the Homebrew log **DO NOT CHANGE**
-rubyGemsLog="/private/var/log/RubyGems.log"
+## installRubyGemsLog: Location of the installRubyGems script log **DO NOT CHANGE**
+installRubyGemsLog="/private/var/log/installRubyGemsLog.log"
 ## currentTime: Gets the time for the log **DO NOT CHANGE**
 currentTime=$(date +%H:%M)
 
@@ -95,8 +92,8 @@ log_it () {
     fi
 
     if [[ ! -z "$logEvent" ]]; then
-        echo ">>[InstallRubyGems.sh] :: $logEvent [$(date +%H:%M)] :: $logMessage"
-        echo ">>[InstallRubyGems.sh] :: $logEvent [$(date +%H:%M)] :: $logMessage" >> "$InstallRubyGems"
+        echo ">>[installRubyGemsLog.sh] :: $logEvent [$(date +%H:%M)] :: $logMessage"
+        echo ">>[installRubyGemsLog.sh] :: $logEvent [$(date +%H:%M)] :: $logMessage" >> "$installRubyGemsLog"
     fi
 }
 
@@ -111,6 +108,14 @@ finish_dialog () {
     update_dialog "quit:"
     exit 0
 }
+
+if [[ ! -f "$dialogPath" ]]; then
+    log_it "swiftDialog not installed"
+    dialogDownload=$( curl -sL https://api.github.com/repos/bartreardon/swiftDialog/releases/latest )
+    dialogURL=$(get_json_value "$dialogDownload" 'assets[0].browser_dialogURL')
+    curl -L --output "dialog.pkg" --create-dirs --output-dir "/var/tmp" "$dialogURL"
+    installer -pkg "/var/tmp/dialog.pkg" -target /
+fi
 
 rm "$dialogLogFile"
 eval "$dialogPath" "${dialogConfig[*]}" & sleep 1
@@ -134,13 +139,13 @@ install_gems () {
     for p in ${ruby_gems//,/ }; do
         log_it "Installing $p.."
         update_dialog "listitem: title: $p, status: wait"
-        gem install $p 2>&1 | tee -a "$InstallRubyGems"
+        gem install $p 2>&1 | tee -a "$installRubyGemsLog"
         checkInstall=$(which $p | grep "not found")
         if [[ -z "$checkInstall" ]]; then
             log_it "success" "$p was installed successfully."
             update_dialog "listitem: title: $p, status: success"
         else
-            log_it "error" "$p was unable to be installed. View RubyGems.log for details."
+            log_it "error" "$p was unable to be installed. View installRubyGemsLog.log for details."
             update_dialog "listitem: title: $p, status: error"
         fi
     done

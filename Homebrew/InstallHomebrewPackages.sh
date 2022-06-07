@@ -40,7 +40,7 @@
 homebrewPackages="$4"
 ## currentUser: Grabs the username of the current logged in user **DO NOT CHANGE**
 currentUser=$(echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ && ! /loginwindow/ { print $3 }')
-## installHomebrewLog: Location of the installHomebrew script log **DO NOT CHANGE**
+## InstallHomebrewPackages: Location of the InstallHomebrewPackages script log **DO NOT CHANGE**
 InstallHomebrewPackages="/private/var/log/InstallHomebrewPackages.log"
 ## homebrewLog: Location of the Homebrew log **DO NOT CHANGE**
 homebrewLog="/private/var/log/Homebrew.log"
@@ -127,6 +127,14 @@ else
     log_it "error" "Missing list of Homebrew Packages (Script Parameter #4)"
     update_dialog "listitem: index: $((currentStep++)), status: fail"
     exit 1
+fi
+
+if [[ ! -f "$dialogPath" ]]; then
+    log_it "swiftDialog not installed"
+    dialogDownload=$( curl -sL https://api.github.com/repos/bartreardon/swiftDialog/releases/latest )
+    dialogURL=$(get_json_value "$dialogDownload" 'assets[0].browser_dialogURL')
+    curl -L --output "dialog.pkg" --create-dirs --output-dir "/var/tmp" "$dialogURL"
+    installer -pkg "/var/tmp/dialog.pkg" -target /
 fi
 
 homebrew_check () {

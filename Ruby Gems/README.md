@@ -1,22 +1,21 @@
-# Ruby Gems
-> Note: This README.md is still in the process of being written. (6/6/22)
+# `InstallRubyGems.sh`
 
-## `InstallRubyGems.sh`
-**Version:** 0.1
-**Last Updated:** 06/06/2022
-
-An easy way to install Ruby Gems on macOS systems via Jamf Pro.
-
-This script will create the following log files:
- - `/private/var/log/InstallHomebrewPackages.log`
-   - This is the logfile for the InstallHomebrewPackages Script
- - `/private/var/log/Homebrew.log`
-   - This is the logfile for when the script updates Homebrew
+An easy way to install Ruby Gems on macOS system via Jamf Pro.
 
 ----
 ## Requirements
- - [swiftDialog](https://github.com/bartreardon/swiftDialog)
+  - [swiftDialog](https://github.com/bartreardon/swiftDialog) installed.
+    - **Note:** This script will download and install swiftDialog if it's not found.
 
 ----
 ## Setup
-This script uses Jamf Pro script parameters to install Ruby Gems. When adding this script to a policy, you will need to enter the list of Ruby Gems to install in **script parameter #4** seperated by commas.
+ 1. Add script to Jamf Pro Server
+ 1. Create a new policy and add the `InstallRubyGems.sh` script
+ 1. Enter the list of Ruby Gems to install in Script Parameter #4 as a Comma Seperated List
+   - **Example:** `fastlane,cocoapods,slather,xcpretty,xcode-install,bundler,jazzy`
+
+> Be sure to set the trigger and scope correctly. This will vary based on how you want to deploy it. 
+
+----
+## Logging
+This script creates a logfile at `/private/var/log/installRubyGemsLog.log`

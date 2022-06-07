@@ -37,7 +37,7 @@
 
 ################# VARIABLES ######################
 ## xcodeCLITrigger: The name of the trigger on the policy that installs Xcode Command Line Tools **REQUIRED**
-xcodeCLITrigger="installXcodeCLI"
+xcodeCLITrigger="$4"
 ## currentUser: Grabs the username of the current logged in user **DO NOT CHANGE**
 currentUser=$(echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ && ! /loginwindow/ { print $3 }')
 ## installHomebrewLog: Location of the installHomebrew script log **DO NOT CHANGE**
@@ -108,6 +108,11 @@ finish_dialog () {
     update_dialog "quit:"
     exit 0
 }
+
+if [[ -z "$xcodeCLITrigger" ]]; then
+    log_it "error" "Missing Xcode Command Line Tools Trigger in Script Parameter #4."
+    exit 1
+fi
 
 rm "$dialogLogFile"
 eval "$dialogPath" "${dialogConfig[*]}" & sleep 1
