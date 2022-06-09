@@ -36,7 +36,13 @@
 #
 ####################################################################################################
 
-import logging, sys, subprocess
+import logging, sys, subprocess, os
+
+################# VARIABLES ######################
+findUser = os.popen('stat -f %Su /dev/console')
+currentUser = findUser.read()
+currentUser = currentUser.strip()
+###################################################
 
 logging.basicConfig(
     ## Logging Levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
@@ -46,23 +52,7 @@ logging.basicConfig(
     format = '>>[%(filename)s] :: %(levelname)s [%(asctime)s] :: %(message)s'
 )
 
-## Function to install the python3 package
-def install(package):
-    try:
-        __import__(package)
-        logging.info(f'{package} is already installed! Lets make sure it is up to date!')
-        try:
-            subprocess.check_call([sys.executable, "-m", "pip", "-q", "-q", "install", "--upgrade", package])
-            logging.info(f'{package} is up to date.')
-        except Exception as errorMessage:
-            logging.error(errorMessage)
-    except:
-        logging.info(f'Looks like {package} isnt installed..installing now')
-        try:
-            subprocess.check_call([sys.executable, "-m", "pip", "-q", "-q", "install", package])
-            logging.info(f'Successfully installed {package}!')
-        except Exception as errorMessage:
-            logging.error(errorMessage)
+logging.info(f'Starting script as user {currentUser}')
 
 ## Check to see if Script Parameter #4 contains the list of python3 packages to install, if not exit.
 if sys.argv[4]:
@@ -73,10 +63,34 @@ else:
     logging.error('Missing list of python3 packages to install. Check Script Parameter #4.')
     sys.exit(1)
 
+## Function to install the python3 package
+def install(package):
+    try:
+        # __import__(package)
+        os.system(f"su -l {currentUser} -c \"/usr/local/bin/python3 -c 'import {package}'\"")
+        logging.info(f'{package} is already installed! Lets make sure it is up to date!')
+        try:
+            # subprocess.check_call([sys.executable, "-m", "pip", "-q", "-q", "install", "--upgrade", package])
+            subprocess.run(["su", "-l", currentUser, "-c", f"/usr/local/bin/python3 -m pip -q -q install --upgrade {package} --user"])
+            logging.info(f'{package} is up to date.')
+        except Exception as errorMessage:
+            logging.error(errorMessage)
+    except:
+        logging.info(f'Looks like {package} isnt installed..installing now')
+        try:
+            subprocess.run(["su", "-l", currentUser, "-c", f"/usr/local/bin/python3 -m pip -q -q install {package} --user"])
+            # subprocess.check_call([sys.executable, "-m", "pip", "-q", "-q", "install", package])
+            logging.info(f'Successfully installed {package}!')
+        except Exception as errorMessage:
+            logging.error(errorMessage)
+
+
+
 ## Check to see if pip3 is up to date and if not, install the latest version
 try:
     logging.info('Making sure pip3 is up to date.')
-    subprocess.check_call([sys.executable, "-m", "pip", "-q", "-q", "install", "--upgrade", "pip"])
+    # subprocess.check_call([sys.executable, "-m", "pip", "-q", "-q", "install", "--upgrade", "pip"])
+    subprocess.run(["su", "-l", currentUser, "-c", f"/usr/local/bin/python3 -m pip -q -q install --upgrade pip"])
     logging.info('pip3 update check complete.')
 except Exception as errorMessage:
     logging.error(errorMessage)
