@@ -1,0 +1,20 @@
+Policy Name,Policy ID,Policy Enabled?,Packages,Scripts,Policy Scope,Scope: Computers,Scope: Computer Groups,Scope: Excluded Computers,Scope: Excluded Computer Groups
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=13&o=r"", ""Cache Xcode Package"")",13,True,Xcode_13.4.xip.pkg (ID: 7),,All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=8&o=r"", ""Elevate Account"")",8,True,,Temporary User Account Elevation (ID: 2),All Computers,N/A,N/A,N/A,"Bound Systems (ID: 5), Software Updates Available (ID: 7)"
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=10&o=r"", ""Install Homebrew"")",10,True,,InstallHomebrew.sh (ID: 3),All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=16&o=r"", ""Install Homebrew Packages"")",16,True,,Install Homebrew Packages (ID: 6),All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=6&o=r"", ""Install Jamf Connect"")",6,True,Jamf Connect [2.11] (ID: 1),,All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=4&o=r"", ""Install jamfAuth"")",4,True,,Install jamfAuth (ID: 1),All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=5&o=r"", ""Install Mooncheese Resources"")",5,True,"Install Mooncheese Items.pkg (ID: 3), Tux.pkg (ID: 9)",,All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=18&o=r"", ""Install Python3 Packages"")",18,True,,Install Python3 Packages (ID: 8),All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=17&o=r"", ""Install Ruby Gems"")",17,True,,Install Ruby Gems (ID: 7),All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=11&o=r"", ""Install swiftDialog"")",11,True,dialog-1.10.4-2602.pkg (ID: 5),Add swiftDialog To Path (ID: 4),All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=12&o=r"", ""Install unxip"")",12,True,Install unxip.pkg (ID: 6),,All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=14&o=r"", ""Install Xcode"")",14,True,,Install Xcode (ID: 5),All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=9&o=r"", ""Install Xcode CLI"")",9,True,Command Line Tools.pkg (ID: 4),,All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=2&o=r"", ""Setup Jamf Connect"")",2,False,Jamf Connect [2.11] (ID: 1),,All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=19&o=r"", ""Setup Xcode, Homebrew, Ruby Gems and Python3"")",19,True,,"Setup Xcode, Homebrew, Ruby Gems and Python (ID: 9)",All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=7&o=r"", ""Submit Computer Inventory"")",7,True,,,All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=3&o=r"", ""Test Sound"")",3,True,,,Custom,ladmin’s MacBook Pro (ID: 1),N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=15&o=r"", ""Test Update"")",15,True,,,Custom,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/policies.html?id=1&o=r"", ""Update Inventory"")",1,True,,,All Computers,N/A,N/A,N/A,N/A

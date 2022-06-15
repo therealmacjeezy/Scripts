@@ -1,7 +1,7 @@
 ##########################################
-# getScopes.py
+# CreateSummary.py
 # Created: 2022-05-11
-# Modified: N/A
+# Modified: 2022-06-15
 # josh.harvey[at]jamf.com
 # https://github.com/therealmacjeezy
 ##########################################
@@ -22,6 +22,26 @@ def get_and_count_policies(apiToken, jamfURL):
     except Exception as errorMessage:
         print(f"get_and_count_policies [error]:\nmsg: {errorMessage}")
 
+def check_policy_packages(apiToken, jamfURL, policyID):
+    headers = {'accept': 'application/json', 'Authorization': f'Bearer {apiToken}'}
+    apiURL = f"https://{jamfURL}/JSSResource/policies/id/{policyID}/subset/Packages"
+    try:
+        r = requests.get(apiURL, headers=headers)
+        policyPackagesJSON = r.json()
+        return policyPackagesJSON
+    except Exception as errorMessage:
+        print(f"check_policy_packages [error]:\nmsg: {errorMessage}")
+
+def check_policy_scripts(apiToken, jamfURL, policyID):
+    headers = {'accept': 'application/json', 'Authorization': f'Bearer {apiToken}'}
+    apiURL = f"https://{jamfURL}/JSSResource/policies/id/{policyID}/subset/Scripts"
+    try:
+        r = requests.get(apiURL, headers=headers)
+        policyScriptsJSON = r.json()
+        return policyScriptsJSON
+    except Exception as errorMessage:
+        print(f"check_policy_scripts [error]:\nmsg: {errorMessage}")
+        
 def check_policy_scope(apiToken, jamfURL, policyID):
     headers = {'accept': 'application/json', 'Authorization': f'Bearer {apiToken}'}
     apiURL = f"https://{jamfURL}/JSSResource/policies/id/{policyID}/subset/Scope"
@@ -43,7 +63,7 @@ def check_policy_status(apiToken, jamfURL, policyID):
         print(f"check_policy_status [error]:\nmsg: {errorMessage}")
 
 def start_policy_check(apiToken, jamfURL):
-    policyCSVHeaders = ['Policy Name', 'Policy ID', 'Policy Enabled?', 'Policy Scope', 'Scope: Computers', 'Scope: Computer Groups', 'Scope: Excluded Computers', 'Scope: Excluded Computer Groups']
+    policyCSVHeaders = ['Policy Name', 'Policy ID', 'Policy Enabled?', 'Packages', 'Scripts', 'Policy Scope', 'Scope: Computers', 'Scope: Computer Groups', 'Scope: Excluded Computers', 'Scope: Excluded Computer Groups']
     data = []
     computersScope = ""
     computerGroupsScope = ""
@@ -65,6 +85,8 @@ def start_policy_check(apiToken, jamfURL):
         try:
             getPolicyScopeInfo = check_policy_scope(apiToken, jamfURL, policyID)
             getPolicyStatusInfo = check_policy_status(apiToken, jamfURL, policyID)
+            getPolicyPackageInfo = check_policy_packages(apiToken, jamfURL, policyID)
+            getPolicyScriptInfo = check_policy_scripts(apiToken, jamfURL, policyID)
             theScope = ''
             print(f"{policyName} (ID: {policyID})")
             policyScope = getPolicyScopeInfo['policy']['scope']['all_computers']
@@ -73,6 +95,38 @@ def start_policy_check(apiToken, jamfURL):
 
             policyComputersExclusions = getPolicyScopeInfo['policy']['scope']['exclusions']['computers']
             policyComputerGroupsExclusions = getPolicyScopeInfo['policy']['scope']['exclusions']['computer_groups']
+            
+            policyPackageInfo = getPolicyPackageInfo['policy']['package_configuration']['packages']
+            policyScriptInfo = getPolicyScriptInfo['policy']['scripts']
+
+            if policyPackageInfo:
+                # print(policyPackageInfo)
+                if len(policyPackageInfo) == 1:
+                    policyPackages = f"{policyPackageInfo[0]['name']} (ID: {policyPackageInfo[0]['id']})"
+                else:
+                    policyPackages_tmp = ''
+                    for i in policyPackageInfo:
+                        # print(f"i: {i}")
+                        policyPackages_tmp += f"{i['name']} (ID: {i['id']})" + ", "
+                    policyPackages_tmp = policyPackages_tmp.strip(', ')
+                    policyPackages = policyPackages_tmp
+                print(f"\tPackages: {policyPackages}")
+            else:
+                policyPackages = ''
+
+            if policyScriptInfo:
+                if len(policyScriptInfo) == 1:
+                    policyScripts = f"{policyScriptInfo[0]['name']} (ID: {policyScriptInfo[0]['id']})"
+                else:
+                    policyScripts_tmp = ''
+                    for i in policyScriptInfo:
+                        # print(f"i: {i}")
+                        policyScripts_tmp += f"{i['name']} (ID: {i['id']})" + ", "
+                    policyScripts_tmp = policyScripts_tmp.strip(', ')
+                    policyScripts = policyScripts_tmp
+                print(f"\tScripts: {policyScripts}")
+            else:
+                policyScripts = ''
 
             if policyComputersExclusions:
                 if len(policyComputersExclusions) == 1:
@@ -128,7 +182,7 @@ def start_policy_check(apiToken, jamfURL):
                     computerGroupsScope = "N/A"
             else:
                 theScope = "All Computers"
-            policyData = [f'=HYPERLINK(\"https://{jamfURL}/policies.html?id={policyID}&o=r", \"{policyName}\")', policyID, policyStatus, theScope, computersScope, computerGroupsScope, excludedComputers, excludedComputerGroups]
+            policyData = [f'=HYPERLINK(\"https://{jamfURL}/policies.html?id={policyID}&o=r", \"{policyName}\")', policyID, policyStatus, policyPackages, policyScripts, theScope, computersScope, computerGroupsScope, excludedComputers, excludedComputerGroups]
             data.append(policyData)
         except Exception as errorMessage:
             print(f"start_policy_check [error]:\nmsg: {errorMessage}")

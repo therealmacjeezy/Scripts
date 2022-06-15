@@ -1,0 +1,17 @@
+Configuration Profile Name,Configuration Profile ID,Configuration Profile Scope,Scope: Computers,Scope: Computer Groups,Scope: Excluded Computers,Scope: Excluded Computer Groups
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=1&o=r"", ""Default Plan - Jamf Protect Configuration"")",1,All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=3&o=r"", ""Jamf Connect - Login"")",3,All Computers,N/A,N/A,N/A,Remove Jamf Connect (ID: 3)
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=4&o=r"", ""Jamf Connect - Menu"")",4,All Computers,N/A,N/A,N/A,Remove Jamf Connect (ID: 3)
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=5&o=r"", ""Jamf Connect License"")",5,All Computers,N/A,N/A,N/A,Remove Jamf Connect (ID: 3)
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=8&o=r"", ""Loading... Network Profile"")",8,Custom,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=10&o=r"", ""Jamf Connect Login Window (Self Service)"")",10,Custom,N/A,Remove Jamf Connect (ID: 3),N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=11&o=r"", ""Jamf Connect Menu (Self Service)"")",11,Custom,N/A,"macOS Update Ready (12.3.1) (ID: 4), Remove Jamf Connect (ID: 3)",N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=12&o=r"", ""Jamf Connect License (Self Service)"")",12,Custom,N/A,Remove Jamf Connect (ID: 3),N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=13&o=r"", ""Disable Displays Prefrence Pane"")",13,All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=14&o=r"", ""Jamf Connect - Menu Keychain Test"")",14,All Computers,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=15&o=r"", ""Keychain Test"")",15,All Computers,N/A,N/A,ladmin’s MacBook Pro (ID: 1),Bound Systems (ID: 5)
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=20&o=r"", ""Test NDES 3"")",20,Custom,N/A,N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=21&o=r"", ""Test NDES 4"")",21,Custom,"ladmin’s MacBook Pro (ID: 1), macOSvm-ColdBeer (ID: 2), apitest (ID: 3)",N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=22&o=r"", ""Test NDES 5"")",22,Custom,apitest (ID: 3),N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=23&o=r"", ""Test NDES 6"")",23,Custom,apitest (ID: 3),N/A,N/A,N/A
+"=HYPERLINK(""https://mooncheese.jamfcloud.com/OSXConfigurationProfiles.html?id=24&o=r"", ""Jamf Connect Debug Logging"")",24,Custom,test’s Virtual Machine (ID: 8),N/A,N/A,N/A

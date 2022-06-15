@@ -2,6 +2,8 @@
 
 > This script uses [jamfAuth](https://github.com/therealmacjeezy/JamfAuth) to perform the API authentication. Looking to setup **jamfAuth**? [Click here..](https://github.com/therealmacjeezy/JamfAuth#installation)
 
+**Last Updated:** 06/15/2022 - Added Policy Packages and Policy Scripts functions.
+
 Looking for an easy way to get the scopes for all of your Policies and Configuration Profiles? Look no further.. The `CreateScopeSummary.py` does just that. 
 
 This script reaches out to your Jamf Pro Server and gets a list of the Policies and Configuration Profiles you are using within your Jamf Pro Server. It then loops through each of the Policies and Configuration Profiles to get the following information:
@@ -10,6 +12,8 @@ This script reaches out to your Jamf Pro Server and gets a list of the Policies 
     - When this gets saved to the `.csv`, a hyperlink gets created to take you to that policy within Jamf Pro when clicked on.
  - Policy / Configuration Profile ID
  - Policy Status *(Is it enabled?)*
+ - Policy Packages
+ - Policy Scripts
  - Policy / Configuration Profile Scope
  - Policy / Configuration Profile Exclusions
 
@@ -25,6 +29,8 @@ Below are the categories the script **currently checks for** within `scope` and 
 ### To-Do
 - [x] Add Exclusions to the Policy section
 - [x] Add Policy Status (enabled/disabled)
+- [x] Add Policy Packages (if any are added)
+- [x] Add Policy Scripts (if any are added)
 - [ ] Add the following categories to the scoped targets and exclusions search:
   - [ ] Users
   - [ ] LDAP User Groups 
@@ -76,16 +82,29 @@ python3 /path/to/CreateScopeSummary.py
 
 ==== Jamf Pro Policies ====
 
->> Total Policies: 8
+>> Total Policies: 10
 ----------------------------
+Cache Xcode Package (ID: 13)
+	Packages: Xcode_13.4.xip.pkg (ID: 7)
 Elevate Account (ID: 8)
+	Scripts: Temporary User Account Elevation (ID: 2)
+Install Homebrew (ID: 10)
+	Scripts: InstallHomebrew.sh (ID: 3)
+Install Homebrew Packages (ID: 16)
+	Scripts: Install Homebrew Packages (ID: 6)
 Install Jamf Connect (ID: 6)
+	Packages: Jamf Connect [2.11] (ID: 1)
 Install jamfAuth (ID: 4)
+	Scripts: Install jamfAuth (ID: 1)
 Install Mooncheese Resources (ID: 5)
-Setup Jamf Connect (ID: 2)
-Submit Computer Inventory (ID: 7)
-Test Sound (ID: 3)
-Update Inventory (ID: 1)
+	Packages: Install Mooncheese Items.pkg (ID: 3), Tux.pkg (ID: 9)
+Install Python3 Packages (ID: 18)
+	Scripts: Install Python3 Packages (ID: 8)
+Install Ruby Gems (ID: 17)
+	Scripts: Install Ruby Gems (ID: 7)
+Install swiftDialog (ID: 11)
+	Packages: dialog-1.10.4-2602.pkg (ID: 5)
+	Scripts: Add swiftDialog To Path (ID: 4)
 
 The Profile Scope Overview has been saved at:
 	=> /Users/josh.harvey/Github/Scripts/Create Policy and Profile Scope Overview/JamfPro_PolicyScope_Overview-05122022.csv
@@ -111,20 +130,29 @@ The Configuration Profile Scope Overview has been saved at:
 ```
 
 
-#### Example 2: `JamfPro_ConfigurationProfile_ScopeOverview-05122022.csv`
-| **Configuration Profile Name**            | **Configuration Profile ID** | **Configuration Profile Scope** | **Scope: Computers** | **Scope: Computer Groups**                              | **Scope: Excluded Computers**  | **Scope: Excluded Computer Groups** |
-|-------------------------------------------|------------------------------|---------------------------------|----------------------|---------------------------------------------------------|--------------------------------|-------------------------------------|
-| Default Plan - Jamf Protect Configuration | 1                            | All Computers                   | N/A                  | N/A                                                     | N/A                            | N/A                                 |
-| Jamf Connect - Login                      | 3                            | All Computers                   | N/A                  | N/A                                                     | N/A                            | Remove Jamf Connect (ID: 3)         |
-| Jamf Connect - Menu                       | 4                            | All Computers                   | N/A                  | N/A                                                     | N/A                            | Remove Jamf Connect (ID: 3)         |
-| Jamf Connect License                      | 5                            | All Computers                   | N/A                  | N/A                                                     | N/A                            | Remove Jamf Connect (ID: 3)         |
-| Loading... Network Profile                | 8                            | All Computers                   | N/A                  | N/A                                                     | N/A                            | N/A                                 |
-| Jamf Connect Login Window (Self Service)  | 10                           | Custom                          | N/A                  | Remove Jamf Connect (ID: 3)                             | N/A                            | N/A                                 |
-| Jamf Connect Menu (Self Service)          | 11                           | Custom                          | N/A                  | macOS Update Ready (ID: 4), Remove Jamf Connect (ID: 3) | N/A                            | N/A                                 |
-| Jamf Connect License (Self Service)       | 12                           | Custom                          | N/A                  | Remove Jamf Connect (ID: 3)                             | N/A                            | N/A                                 |
-| Disable Displays Prefrence Pane           | 13                           | All Computers                   | N/A                  | N/A                                                     | N/A                            | N/A                                 |
-| Jamf Connect - Menu Keychain Test         | 14                           | All Computers                   | N/A                  | N/A                                                     | N/A                            | N/A                                 |
-| Keychain Test                             | 15                           | All Computers                   | N/A                  | N/A                                                     | ladmin‚Äôs MacBook Pro (ID: 1) | Bound Systems (ID: 5)               |
+#### Example 2: `JamfPro_ConfigurationProfile_ScopeOverview-06152022.csv`
+|**Policy Name** | **Policy ID** | **Policy Enabled?** | **Packages** | **Scripts** | **Policy Scope** | **Scope: Computers** | **Scope: Computer Groups** | **Scope: Excluded Computers** | **Scope: Excluded Computer Groups** |
+|--------------------------------------------|---------|---------------|-----------------------------------------------------|---------------------------------------------------|-------------|------------------------------|----------------------|-------------------------|---------------------------------------------------------|
+|Cache Xcode Package                         |13       |TRUE           |Xcode_13.4.xip.pkg (ID: 7)                           |                                                   |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Elevate Account                             |8        |TRUE           |                                                     |Temporary User Account Elevation (ID: 2)           |All Computers|N/A                           |N/A                   |N/A                      |Bound Systems (ID: 5), Software Updates Available (ID: 7)|
+|Install Homebrew                            |10       |TRUE           |                                                     |InstallHomebrew.sh (ID: 3)                         |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Install Homebrew Packages                   |16       |TRUE           |                                                     |Install Homebrew Packages (ID: 6)                  |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Install Jamf Connect                        |6        |TRUE           |Jamf Connect [2.11] (ID: 1)                          |                                                   |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Install jamfAuth                            |4        |TRUE           |                                                     |Install jamfAuth (ID: 1)                           |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Install Mooncheese Resources                |5        |TRUE           |Install Mooncheese Items.pkg (ID: 3), Tux.pkg (ID: 9)|                                                   |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Install Python3 Packages                    |18       |TRUE           |                                                     |Install Python3 Packages (ID: 8)                   |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Install Ruby Gems                           |17       |TRUE           |                                                     |Install Ruby Gems (ID: 7)                          |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Install swiftDialog                         |11       |TRUE           |dialog-1.10.4-2602.pkg (ID: 5)                       |Add swiftDialog To Path (ID: 4)                    |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Install unxip                               |12       |TRUE           |Install unxip.pkg (ID: 6)                            |                                                   |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Install Xcode                               |14       |TRUE           |                                                     |Install Xcode (ID: 5)                              |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Install Xcode CLI                           |9        |TRUE           |Command Line Tools.pkg (ID: 4)                       |                                                   |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Setup Jamf Connect                          |2        |FALSE          |Jamf Connect [2.11] (ID: 1)                          |                                                   |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Setup Xcode, Homebrew, Ruby Gems and Python3|19       |TRUE           |                                                     |Setup Xcode, Homebrew, Ruby Gems and Python (ID: 9)|All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Submit Computer Inventory                   |7        |TRUE           |                                                     |                                                   |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Test Sound                                  |3        |TRUE           |                                                     |                                                   |Custom       |ladmin‚Äôs MacBook Pro (ID: 1)|N/A                   |N/A                      |N/A                                                      |
+|Test Update                                 |15       |TRUE           |                                                     |                                                   |Custom       |N/A                           |N/A                   |N/A                      |N/A                                                      |
+|Update Inventory                            |1        |TRUE           |                                                     |                                                   |All Computers|N/A                           |N/A                   |N/A                      |N/A                                                      |
+
 
 
 #### Example 3: `JamfPro_PolicyScope_Overview-05122022.csv`
